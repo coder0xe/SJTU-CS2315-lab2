@@ -1,8 +1,8 @@
 #!/bin/bash -l
-#SBATCH -J matrix-repeat
+#SBATCH -J matrix-opt
 #SBATCH -p cpu -N 1 -n 1 -c 1
 #SBATCH -t 03:00:00
-#SBATCH -o results/lab2-repeat-%j.log
+#SBATCH -o results/lab2-opt-levels-%j.log
 
 set -euo pipefail
 : "${SLURM_JOB_ID:?请使用 sbatch 提交作业，不要在登录节点直接运行}"
@@ -34,11 +34,9 @@ mkdir -p results
   uname -a
 } | tee results/environment.txt
 
-# README §8.6：以 O3 为例，按同一配置重复三次。
+# README §8.6：四个优化级别使用同一个实际最佳块大小。
 best_b="$1"
-: > results/optimal_O3_repeated.txt
-for run in 1 2 3; do
-  echo "===== run=${run} =====" | tee -a results/optimal_O3_repeated.txt
-  srun --cpu-bind=cores ./build/cache_part4_o3 2048 "$best_b" \
-    2>&1 | tee -a results/optimal_O3_repeated.txt
+for opt in 0 1 2 3; do
+  srun --cpu-bind=cores "./build/cache_part4_o${opt}" 2048 "$best_b" \
+    2>&1 | tee "results/optimal_O${opt}.txt"
 done

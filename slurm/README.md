@@ -16,17 +16,17 @@ mkdir -p results
 
 ## 实验与提交命令
 
-文件名中的编号对应本仓库 README 的小节。一个小节有多份实验脚本时，加上实验内容后缀；例如 8.4 的 `block-sweep` 表示初筛，`block-confirm` 表示候选确认。
+文件名中的编号对应本仓库 README 的小节。一个小节有多份实验脚本时，加上实验内容后缀；例如 8.5 的 `block-sweep` 表示初筛，`block-confirm` 表示候选确认。
 
 | README 小节 | 实验 | 在仓库根目录提交 | 实验参数或用途 |
 | --- | --- | --- | --- |
 | Lab2 §7.2 | Lab 2 快速检查 | `sbatch slurm/lab2-7.2.slurm` | 寄存器 `6 12 24 48`，缓存及综合优化 `48 6` |
-| Lab2 §8.2 | 寄存器复用 | `sbatch slurm/lab2-8.2.slurm` | `66 126 258 510 1026 2046`，均能被 6 整除 |
-| Lab2 §8.3 | 循环次序 | `sbatch slurm/lab2-8.3.slurm` | `n=2048`、`b=64`，同时运行六个分块函数 |
-| Lab2 §8.4 | 缓存块大小筛选 | `sbatch slurm/lab2-8.4-block-sweep.slurm` | `n=1024`，`b=16、32、64、128、256` |
-| Lab2 §8.4 | 候选块大小确认 | `sbatch slurm/lab2-8.4-block-confirm.slurm 64 128` | `n=2048`，传入两个实际候选值 |
-| Lab2 §8.5 | 编译优化级别比较 | `sbatch slurm/lab2-8.5.slurm 64` | `n=2048`，O0～O3 使用同一个实际最佳 `b` |
-| Lab2 §8.6 | O3 重复测量 | `sbatch slurm/lab2-8.6.slurm 64` | `n=2048`，按实际最佳 `b` 重复三次 |
+| Lab2 §8.3 | 寄存器复用 | `sbatch slurm/lab2-8.3.slurm` | `66 126 258 510 1026 2046`，均能被 6 整除 |
+| Lab2 §8.4 | 循环次序 | `sbatch slurm/lab2-8.4.slurm` | `n=2048`、`b=64`，同时运行六个分块函数 |
+| Lab2 §8.5 | 缓存块大小筛选 | `sbatch slurm/lab2-8.5-block-sweep.slurm` | `n=1024`，`b=16、32、64、128、256` |
+| Lab2 §8.5 | 候选块大小确认 | `sbatch slurm/lab2-8.5-block-confirm.slurm 64 128` | `n=2048`，传入两个实际候选值 |
+| Lab2 §8.6 | 编译优化级别比较 | `sbatch slurm/lab2-8.6.slurm 64` | `n=2048`，O0～O3 使用同一个实际最佳 `b` |
+| Lab2 §8.7 | O3 重复测量 | `sbatch slurm/lab2-8.7.slurm 64` | `n=2048`，按实际最佳 `b` 重复三次 |
 
 表格中的 `64 128` 和最佳 `b=64` 都是示例。请按上一阶段的测量结果替换。候选确认脚本要求两个不同的候选值；三个需要块大小参数的脚本均从 `16、32、64、128、256` 中选择，缺少或传错参数会退出。
 

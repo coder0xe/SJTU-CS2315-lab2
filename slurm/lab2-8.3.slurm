@@ -1,8 +1,8 @@
 #!/bin/bash -l
-#SBATCH -J matrixlab
+#SBATCH -J matrix-register
 #SBATCH -p cpu -N 1 -n 1 -c 1
 #SBATCH -t 03:00:00
-#SBATCH -o results/lab2-%j.log
+#SBATCH -o results/lab2-register-%j.log
 
 set -euo pipefail
 : "${SLURM_JOB_ID:?请使用 sbatch 提交作业，不要在登录节点直接运行}"
@@ -23,6 +23,6 @@ mkdir -p results
   uname -a
 } | tee results/environment.txt
 
-# README §8.3：正式循环次序实验。
-srun --cpu-bind=cores ./build/cache_part3 2048 64 \
-  2>&1 | tee results/loop_orders.txt
+# README §8.3：所有规模均能被 6 整除。
+srun --cpu-bind=cores ./build/reg_reuse 66 126 258 510 1026 2046 \
+  2>&1 | tee results/register_reuse.txt

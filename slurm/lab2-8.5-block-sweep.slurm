@@ -23,7 +23,7 @@ mkdir -p results
   uname -a
 } | tee results/environment.txt
 
-# README §8.4：固定 n=1024，筛选全部五个候选块大小。
+# README §8.5：固定 n=1024，筛选全部五个候选块大小。
 : > results/cache_block_sweep.txt
 for b in 16 32 64 128 256; do
   echo "===== block_size=${b} =====" | tee -a results/cache_block_sweep.txt

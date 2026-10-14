@@ -8,7 +8,7 @@ set -euo pipefail
 : "${SLURM_JOB_ID:?请使用 sbatch 提交作业，不要在登录节点直接运行}"
 
 if (( $# != 2 )); then
-  echo "用法：sbatch slurm/lab2-8.4-block-confirm.slurm 候选b1 候选b2" >&2
+  echo "用法：sbatch slurm/lab2-8.5-block-confirm.slurm 候选b1 候选b2" >&2
   exit 2
 fi
 for b in "$@"; do
@@ -39,7 +39,7 @@ mkdir -p results
   uname -a
 } | tee results/environment.txt
 
-# README §8.4：传入在 n=1024 时选出的两个候选值。
+# README §8.5：传入在 n=1024 时选出的两个候选值。
 : > results/cache_block_2048.txt
 for b in "$@"; do
   echo "===== n=2048, block_size=${b} =====" | tee -a results/cache_block_2048.txt
